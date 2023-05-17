@@ -14,47 +14,65 @@ PV Modules: modules are connected in series and parallel. As shown in table belo
 
 |  | **series connection** | **parallel connection** |
 | --- | --- | --- |
-| **system** | grid-connected PV system | stand-alone PV system |
+| **system** | grid-connected PV system | stand-alone PV system (one module per string) |
 | **current(in A) vs. voltage(in V)** | same current, add up voltage | same voltage, add up current |
 | **name** | string | - |
 | **structure** | <img src='./src/pvmodseries.png' width='300' height='200'/> | <img src='./src/pvmodparallel.png' width='300' height='200'/> |
 
 Note: 
 - Use same type of modules to avoid power loss. Same type means same manufacturer, model, etc.
-- We also want the module to be electrically identical, meaning same current and voltage.
+- We also want the module to be electrically identical, meaning same current and voltage. But in practice we allow some tolerance.
+- DC voltage decreases and current increases, as temperature increases.
+
+In reality, the PV generator is a combination of series and parallel connected modules. As shown in image below:
+
+<img src='./src/pvmod.jpg' width='300' height='400' />
+
+Note:
+- Suppose each module has current of 2A, voltage of 50V.
+- In above image, three are 3 parallel strings, each string has 3 modules connected in series.
+- So each string has current of 2A, voltage of 150V (3*50V).
+- The whole system has current of 6A (3*2A)
+- Total power is 300W (6A*150V)
 
 
 ----
 ## **2. PV Array Junction Box**
 
 Purpose: combine all parallelly aligned strings into one DC output. As shown in image below:
-<img src='./src/pvarray.png' width='500' height='300' />
 
+<img src='./src/pvarray.png' width='500' height='300' />
 
 Components: diodes, isolator, fuses, DC main cable
 - fuses: 
   - protect wiring against overloading
-  - it will blow when current exceeding has occurred
-- diodes: 
-  - used to decouple individual module strings
-  - if short circuit or shading occurred for one string, other strings should not be affected, meaning current will not flow back through the failed string??
+  - it will blow when current exceeding (short circuit) has occurred
+- diodes:
+  - connect to each string (decouple strings), only allow current to flow in forward direction
+  - if short circuit or shading occurred for one string, other strings should not be affected, as the diode will prevent current from flowing back to the failed string
+  - tiny power loss during current flow
+  - string diodes may be excluded in new technology for grid-connected PV systems
 - isolator:
-  - functions mainly to switch off, isolate, and protect the system, eg when testing or maintenance
+  - functions mainly to switch off, isolate, and protect the system, e.g when testing or maintenance
 - DC main cable:
   - connects the junction box to the inverter
+
+Note:
+- Short circuit: when the current is too high, the voltage will drop to zero (no or little resistance).
+- Shading: WHAT IS THIS??
 
 
 ----
 ## **3. Inverter**
-Definition: DC-AC converter, link between PC array and AC grid/load. As shown in image below:
+Symbol, as shown in image below:
 
 <img src='./src/invertersymbol.png' width='100' height='100' />
 
-Funtions:
-- convert DC to AC
-- adjustment of the inverter’s operating point to the MPP of the PV modules (MPP tracking)
-- recording of the operating data and signalling (e.g. display, data storage and data transfer)
-- Grid monitoring or grid management
+Funtionalities:
+1. convert DC to AC
+2. adjustment of the inverter’s operating point to the MPP of the PV modules (MPP tracking)
+3. recording of the operating data and signalling (e.g. display, data storage and data transfer)
+4. Grid monitoring or grid management
 
 
 Two types: grid-connected inverter and stand-alone inverter. As shown in table below:
@@ -85,16 +103,6 @@ We also need to compare low-frequency and high-frequency transformer. As shown i
 
 
 ----
-## **4. Efficiency Calculation**
+## **4. Calculation**
 
-Conversion efficiency
-
-Adaptive efficiency
-
-Static efficiency
-
-Euro efficiency
-
-Californian efficiency
-
-Overall efficiency
+Efficiency calculation: Conversion efficiency, Adaptive efficiency, Static efficiency, Euro efficiency, Californian efficiency, Overall efficiency. (No need to know much about this).
