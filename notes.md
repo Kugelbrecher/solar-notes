@@ -68,21 +68,27 @@ Symbol, as shown in image below:
 
 <img src='./src/invertersymbol.png' width='100' height='100' />
 
-Funtionalities:
+Funtionalities (page121):
 1. convert DC to AC
-2. adjustment of the inverter’s operating point to the MPP of the PV modules (MPP tracking)
-3. recording of the operating data and signalling (e.g. display, data storage and data transfer)
-4. Grid monitoring or grid management
+2. adjust voltage to reach maximum power point (MPP), with current is almost constant
+  - <img src='./src/mpp.png' width='300' height='200' />
+3. record operating data and signalling (e.g. display, data storage and data transfer)
+4. ADDING other
 
-
-Two types: grid-connected inverter and stand-alone inverter. As shown in table below:
-
+Two types of inverter based on use, as shown in table below:
 |  | **grid-connected inverter** | **stand-alone inverter** |
 | --- | --- | --- |
-| **components** | bridge circuit with thyristors | blur yet |
+| **Usage** | grid-connected PV system | stand-alone PV system |
+| **Importance** | focus, used in our business | ignore, usually for personal uses, like home roof or car charging |
+| **category by system size** | one-phase inverter, three-phase inverter | - |
+| **category by operation** | grid-controlled inverter, self-commutated inverter | - |
+
+category by operation:
+|  | **grid-controlled inverter** | **sself-commutated inverter** |
+| --- | --- | --- |
+| **components** | bridge circuit with thyristors |  |
 | **principle** | <img src='./src/invertergridprin.png' width='300' height='200'/> | <img src='./src/inverterselfcomprin.png' width='300' height='200'/> |
 | **wave** | add img | add img, this is more popular |
-
 
 Due to problem of electromagnetic compatibility (EMC), transformer is introduced to the inverter. It mainly functions to:
 - provide electrical isolation
